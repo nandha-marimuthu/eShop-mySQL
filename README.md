@@ -1,3 +1,3 @@
 # eShop-mySQL
 
-Electronics shop
+Electronics shop application using python and MySQL
