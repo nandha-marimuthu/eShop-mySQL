@@ -22,8 +22,8 @@ def admin():
   data=mycursor.fetchone()
   if data:
     print("Welcome admin !")
-    from admin import sales
-    sales()
+    from admin import ad
+    ad()
   else:
     print('Invalid id or password')
 
