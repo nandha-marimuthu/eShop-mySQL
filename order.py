@@ -53,7 +53,20 @@ def order(n):
       print("invalid code")
 
     print('Order placed')
-    print('Item : %s  Quantity : %d  Bill : %d'%(item,qty,bill),'\nYour order will reach you soon!')
+    print('\nItem :'+item +'\nQuantity :'+str(qty) + '\nBill:'+str(bill) +'\nYour order will reach you soon!')
+    import smtplib, ssl
+
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "nandhaa403@gmail.com"  # Enter your address
+    receiver_email = "nandhabalanmarimuthu15@gmail.com"  # Enter receiver address
+    password = 'nandhaaku'
+    message = '\nItem :'+item +'\nQuantity :'+str(qty) + '\nBill:'+str(bill) +'\nYour order will reach you soon!'
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+      server.login(sender_email, password)
+      server.sendmail(sender_email, receiver_email, message)
     od = (name,item,ty,qty,place,bill)
     qu = 'insert into orderDetails(customer_name,item,type,qty,place,bill) values(%s,%s,%s,%s,%s,%s)'
     mycursor.execute(qu,od)

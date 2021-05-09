@@ -10,7 +10,20 @@ def cancel():
   data = mycursor.fetchone()
   if data:
     otp=random.randrange(11111,99999)
-    print('Generating OTP: ',otp)
+    print('Generating OTP: ')
+    import smtplib, ssl
+
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    sender_email = "nandhaa403@gmail.com"  # Enter your address
+    receiver_email = "nandhabalanmarimuthu15@gmail.com"  # Enter receiver address
+    password = 'nandhaaku'
+    message = '\nYour otp is '+str(otp)
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+      server.login(sender_email, password)
+      server.sendmail(sender_email, receiver_email, message)
     o=int(input('Enter the OTP: '))
     if o == otp:
 
@@ -34,5 +47,6 @@ def cancel():
       print('Invalid OTP')
   else:
     print('Invalid username/orderid')
+
 
 

@@ -1,7 +1,7 @@
 import mysql.connector
 mydb=mysql.connector.connect(host='localhost',user='root',password='nandhaaku',database='eShop')
 mycursor=mydb.cursor()
-from order import order
+
 
 def login():
   n = input('Username: ')
@@ -10,10 +10,20 @@ def login():
   data=mycursor.fetchone()
   if data:
     print("Welcome to eShop !")
+    from order import order
     order(n)
 
   else:
     print('Invalid id or password')
+    e = input('Press y to register: ')
+    if e == 'y':
+      mycursor.execute('insert into customers(name,password) values(%s,%s)',(n,p))
+      mydb.commit()
+      print('Your Id and password is registered !')
+      from order import order
+      order(n)
+    else:
+      print('Have a nice day!')
 
 def admin():
   n = input('Username: ')
@@ -26,6 +36,7 @@ def admin():
     ad()
   else:
     print('Invalid id or password')
+
 
 
 
