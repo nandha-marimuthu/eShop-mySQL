@@ -1,6 +1,6 @@
 #electronics shop with mysql
-while True:
-  i = int(input("1 For Order\n2 For Cancel\n3 For Admin\n4 For Exit\nEnter: "))
+def eShop():
+  i = int(input("1 For Order\n2 For Cancel\n3 For Admin\nEnter: "))
   if i==1:
     from login import login
     login()
@@ -10,7 +10,6 @@ while True:
   elif i==3:
     from login import admin
     admin()
-  elif i==4:
-    break
   else:
     print('Invalid code')
+eShop()
