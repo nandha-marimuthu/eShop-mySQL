@@ -33,6 +33,26 @@ def item():
   a.columns = ['item','sold']
   print(a)
 
+def addItem():
+  print('Enter what appliance stock you gonna add Item')
+  o = int(input("1 For Electronics\n2 For Laptops\n3 For Phones\nEnter: "))
+  name = input('Name: ')
+  price = input('Price: ')
+  stock = input('Stock: ')
+  if (o==1):
+    mycursor.execute('insert into e(name,price,stock) values(%s,%s,%s)',(name,price,stock))
+    mydb.commit()
+  elif(o==2):
+    mycursor.execute('insert into l(name,price,stock) values(%s,%s,%s)',(name,price,stock))
+    mydb.commit()
+  elif(o==3):
+    mycursor.execute('insert into p(name,price,stock) values(%s,%s,%s)',(name,price,stock))
+    mydb.commit()
+  else:
+    print('Invalid code')
+  print('Item added')
+
+
 def add():
   print('Enter what appliance stock you gonna refill')
   o = int(input("1 For Electronics\n2 For Laptops\n3 For Phones\nEnter: "))
@@ -51,7 +71,7 @@ def add():
 
 def ad():
   while True:
-    a = int(input('1 For total order details\n2 For Categorywise sales\n3 For Itemwise sale\n4 For region wise sales\n5 for Refill stock\n6 For exit '))
+    a = int(input('1 For total order details\n2 For Categorywise sales\n3 For Itemwise sale\n4 For region wise sales\n5 for Refill stock\n6 For addItems\n7 For exit\nEnter:  '))
     if a==1:
       orderDetails()
     elif a==2:
@@ -63,9 +83,8 @@ def ad():
     elif a==5:
       add()
     elif a==6:
+      addItem()
+    elif a==7:
       break
     else:
       break
-
-
-

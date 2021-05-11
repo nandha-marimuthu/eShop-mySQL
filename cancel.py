@@ -10,7 +10,7 @@ def cancel():
   data = mycursor.fetchone()
   if data:
     otp=random.randrange(11111,99999)
-    print('Generating OTP: ')
+    print('Generating OTP....')
     import smtplib, ssl
 
     port = 465  # For SSL

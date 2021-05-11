@@ -61,12 +61,7 @@ def order(n):
     sender_email = "nandhaa403@gmail.com"  # Enter your address
     receiver_email = "nandhabalanmarimuthu15@gmail.com"  # Enter receiver address
     password = 'nandhaaku'
-    message = '\nItem :'+item +'\nQuantity :'+str(qty) + '\nBill:'+str(bill) +'\nYour order will reach you soon!'
 
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-      server.login(sender_email, password)
-      server.sendmail(sender_email, receiver_email, message)
     od = (name,item,ty,qty,place,bill)
     qu = 'insert into orderDetails(customer_name,item,type,qty,place,bill) values(%s,%s,%s,%s,%s,%s)'
     mycursor.execute(qu,od)
@@ -74,6 +69,11 @@ def order(n):
     mycursor.execute('select id from orderDetails order by id desc limit 1')
     oi = mycursor.fetchone()
     print('Your order id is: ',oi[0])
+    message = '\nItem :'+item +'\nQuantity :'+str(qty) + '\nBill:'+str(bill) +'\nYour order will reach you soon!'+'\nYour order id is: '+str(oi[0])
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+      server.login(sender_email, password)
+      server.sendmail(sender_email, receiver_email, message)
     print('Thanks For Choosing us')
 
 
